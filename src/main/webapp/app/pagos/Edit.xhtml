@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Registro de Abonos</title>
+        <style type="text/css">
+            .col1{
+                height:auto;vertical-align: top; width: 100px;
+            }
+            .col2{
+                height:auto; vertical-align: middle; width: 300px;
+            }
+        </style>
+        <link href="#{request.contextPath}/resources/css/dialog.css" rel="stylesheet" type="text/css" />
+        <link href="#{request.contextPath}/resources/css/iconos-1.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <h:form enctype="multipart/form-data">
+            <p:panel>
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Fecha de abono:" for="fechaPago" />
+                    <p:calendar id="fechaPago" locale="es" value="#{uploadController.detallePago.fechaPago}" pattern="dd/MM/yyyy" size="12" required="true" requiredMessage="Fecha de pago"/>
+                    <p:outputLabel value="Monto ($):" for="montoAbono" />
+                    <p:inputText id="montoAbono" value="#{uploadController.detallePago.montoAbono}" style="text-align: right;" size="6" converterMessage="Debe de escribir una cantidad valida" required="true" requiredMessage="Monto del abono">
+                        <f:convertNumber maxFractionDigits="2" />
+                    </p:inputText>
+                    <h:outputLabel value="Ubicación de la imagen:" />
+                    <p:fileUpload value="#{uploadController.file}" fileUploadListener="#{uploadController.fileUploadListener}" mode="simple" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                </h:panelGrid>
+
+                <f:facet name="footer">
+                    <p:commandButton action="#{uploadController.uploadFile}" value="Guardar" ajax="false" />
+                    <p:commandButton action="#{uploadController.cerrar}"  value="Cerrar" ajax="false" />
+                </f:facet>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaOperaciones.xhtml">
+        <ui:define name="content">
+            <p:menubar> 
+                <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
+
+                <f:facet  name="options" class="centradoVertical">  
+                    <div id="divEstadoEdicion" style="position: relative; padding-top: 2px;">
+                        <h:panelGrid id="pnlEstado" columns="3">
+                            <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
+                                <f:facet name="start">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    <p:spacer width="10" height="8"/>
+                                    <p:outputLabel value="Espere por favor.." />
+                                </f:facet>
+
+                                <f:facet name="complete">
+                                    <h:outputText value="" />
+                                </f:facet>
+                            </p:ajaxStatus>
+                        </h:panelGrid>
+                    </div>
+                </f:facet>  
+            </p:menubar>
+
+            <p:panel header="Filtro" id="filtro">
+                <h:panelGrid columns="5">
+                    <p:outputLabel value="Distrito:"/>
+                    <p:selectOneMenu value="#{iglesiaController.distrito}" style="width:100px">
+                        <f:selectItems value="#{distritoController.itemsAvailableSelectMany}"/>
+                        <p:ajax update="filtro pnlDatos" />
+                    </p:selectOneMenu>
+                    <p:spacer width="15" height="8"/>
+                    <p:outputLabel value="Iglesia en:"/>
+                    <p:selectOneMenu id="cboIglesias" value="#{detallePagoController.iglesia}" style="width:200px">
+                        <f:selectItems value="#{iglesiaController.iglesiasByDistrito}"/>
+                        <p:ajax update="pnlDatos" listener="#{iglesiaController.actualizarListaConfirmados}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel header="Datos de personas registradas" id="pnlDatos">
+                <p:commandButton action="#{detallePagoController.prepareCreate}" icon="fa fa-plus" value="Agregar">
+                    <p:ajax event="dialogReturn" listener="#{detallePagoController.onRefrescarLstDetallePago}" update="pnlDatos"/>
+                </p:commandButton>
+                <br/><br/>
+                <p:dataTable value="#{detallePagoController.lstDetallePagoByIglesia}" var="item" rowIndexVar="rowId" style="width: 350px;">
+                    <p:column headerText="Id" width="15">
+                        <h:outputText value="#{rowId + 1}"/>
+                    </p:column>
+                    <p:column headerText="Fecha abono" width="60">
+                        <h:outputText value="#{item.fechaPago}">
+                            <f:convertDateTime pattern="dd/MMMM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Monto" width="40" style="text-align: right;">
+                        <h:outputText value="#{item.montoAbono}">
+                            <f:convertNumber pattern="#,##0.00"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Ver Comprobante" style="width: 50px; text-align: center;">
+                        <p:commandButton icon="fa fa-pencil" title="View" oncomplete="PF('dlgComprobante').show()" update="dlgComprobante">
+                            <f:setPropertyActionListener value="#{item}" target="#{detallePagoController.detallePago}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+            <p:dialog id="dlgComprobante" widgetVar="dlgComprobante">
+                <p:graphicImage value="/DynamicImageServlet?file=#{detallePagoController.detallePago.pathImg}"/>
+            </p:dialog>
+        </ui:define>
+    </ui:composition>
+
+</html>

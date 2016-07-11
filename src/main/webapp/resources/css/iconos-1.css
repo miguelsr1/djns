@@ -1,0 +1,193 @@
+
+/**
+Barra de herramientas
+**/
+.fa-download::before{
+    content:"";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-upload::before{
+    content:"";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-plus::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-close::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-file-o::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-edit::before, .fa-pencil-square-o::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-save::before, .fa-floppy-o::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-print::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-home::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-search::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-check::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-plus-circle::before {
+    content: "";
+    font-size: 16px;
+    color: #33afde;
+    padding:2px;
+}
+.fa-check-circle::before {
+    content: "";
+    font-size: 16px;
+    color: #5fcf80;
+    padding:2px;
+}
+.fa-minus-circle::before {
+    content: "";
+    font-size: 16px;
+    color: #d0525d;
+    padding:2px;
+}
+
+.iconNuevo{
+    background:url('/paquescolar-web/resources/images/nuevo.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconModificar{
+    background:url('/paquescolar-web/resources/images/modificar.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconImprimir{
+    background:url('/paquescolar-web/resources/images/imprimir.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconGuardar{
+    background:url('/paquescolar-web/resources/images/guardar.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconHome{
+    background:url('/paquescolar-web/resources/images/home.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconSalir{
+    background:url('/paquescolar-web/resources/images/salir.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconBorrar{
+    background:url('/paquescolar-web/resources/images/borrar.gif')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconOk{
+    background:url('/paquescolar-web/resources/images/ok.png')  no-repeat !important;
+    height:12px;
+    width:12px;
+    padding:2px;
+}
+.iconCancel{
+    background:url('/paquescolar-web/resources/images/cancel.png')  no-repeat !important;
+    height:12px;
+    width:12px;
+    padding:2px;
+}
+.iconBuscar{
+    background:url('/paquescolar-web/resources/images/lupa.png')  no-repeat !important;
+    height:12px;
+    width:12px;
+    padding:2px;
+}
+.iconAgregarFila{
+    background:url('/paquescolar-web/resources/images/agregar_fila.png')  no-repeat !important;
+    height:12px;
+    width:12px;
+    padding:2px;
+}
+.iconOferta{
+    background:url('/paquescolar-web/resources/images/oferta.png')  no-repeat !important;
+    height:12px;
+    width:12px;
+    padding:2px;
+}
+.iconDetalle{
+    background:url('/paquescolar-web/resources/images/detalle.png')  no-repeat !important;
+    height:12px;
+    width:12px;
+    padding:2px;
+}
+.iconReserva{
+    background:url('/paquescolar-web/resources/images/reserva.png')  no-repeat !important;
+    height:12px;
+    width:12px;
+    padding:2px;
+}
+.iconContrato{
+    background:url('/paquescolar-web/resources/images/contrato.png')  no-repeat !important;
+    height:12px;
+    width:12px;
+    padding:2px;
+}
+.iconEncuesta{
+    background:url('/paquescolar-web/resources/images/encuesta.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconConfig{
+    background:url('/paquescolar-web/resources/images/config.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+.iconWebCam{
+    background:url('/paquescolar-web/resources/images/webcam.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}
+
+.iconTijera{
+    background:url('/paquescolar-web/resources/images/tijera.png')  no-repeat !important;
+    height:16px;
+    width:20px;
+}

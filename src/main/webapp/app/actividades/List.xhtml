@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaOperaciones.xhtml">
+        <ui:define name="content">
+            <p:menubar> 
+                <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
+
+                <f:facet  name="options" class="centradoVertical">  
+                    <div id="divEstadoEdicion" style="position: relative; padding-top: 2px;">
+                        <h:panelGrid id="pnlEstado" columns="3">
+                            <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
+                                <f:facet name="start">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    <p:spacer width="10" height="8"/>
+                                    <p:outputLabel value="Espere por favor.." />
+                                </f:facet>
+
+                                <f:facet name="complete">
+                                    <h:outputText value="" />
+                                </f:facet>
+                            </p:ajaxStatus>
+                        </h:panelGrid>
+                    </div>
+                </f:facet>  
+            </p:menubar>
+
+            <p:panel header="Actividades registradas" id="pnlDatos">
+                <p:commandButton action="#{actividadController.prepareCreate}" icon="fa fa-plus" value="Agregar">
+                    <p:ajax event="dialogReturn" listener="#{actividadController.onRefrescarLstActividad}" update="pnlDatos"/>
+                </p:commandButton>
+                <br/><br/>
+
+                <p:dataTable value="#{actividadController.items}" var="item" rowIndexVar="rowId">
+                    <p:column headerText="Id" style="width: 25px; text-align: center;">
+                        <h:outputText value="#{rowId + 1}"/>
+                    </p:column>
+                    <p:column headerText="Tipo actividad">
+                        <h:outputText value="#{item.idTipoActividad.descripcionTipoActividad}"/>
+                    </p:column>
+                    <p:column headerText="Lugar">
+                        <h:outputText value="#{item.sedeActividad}"/>
+                    </p:column>
+                    <p:column headerText="Costo" style="width: 35px; text-align: right;">
+                        <h:outputText value="#{item.costo}">
+                            <f:convertNumber pattern="#,#00.00"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="F. inicio" style="width: 65px;">
+                        <h:outputText value="#{item.fechaInicio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="F. fin" style="width: 65px;">
+                        <h:outputText value="#{item.fechaFin}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="F. limite de Inscripción" style="width: 70px;">
+                        <h:outputText value="#{item.fechaLimiteInscripcion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Editar" style="width: 36px; text-align: center;">
+                        <p:commandButton actionListener="#{actividadController.prepareEdit}" icon="fa fa-pencil" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{actividadController.actividad}" />
+                            <p:ajax event="dialogReturn" listener="#{actividadController.onRefrescarLstActividad}" update="pnlDatos"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="org.id_djns_war_1.0PU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>java:/DjnDs</jta-data-source>
+    <class>org.id.djns.model.Actividad</class>
+    <class>org.id.djns.model.Asistencia</class>
+    <class>org.id.djns.model.DetalleAsistente</class>
+    <class>org.id.djns.model.DetallePago</class>
+    <class>org.id.djns.model.Distrito</class>
+    <class>org.id.djns.model.Iglesia</class>
+    <class>org.id.djns.model.Persona</class>
+    <class>org.id.djns.model.TipoActividad</class>
+    <class>org.id.djns.model.Usuario</class>
+    <class>org.id.djns.model.Alimentacion</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
+</persistence>

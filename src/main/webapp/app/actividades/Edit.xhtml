@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Mantenimiento de Actividades</title>
+        <style type="text/css">
+            .col1{
+                height:auto;vertical-align: top; width: 100px;
+            }
+            .col2{
+                height:auto; vertical-align: middle; width: 300px;
+            }
+        </style>
+        <link href="#{request.contextPath}/resources/css/dialog.css" rel="stylesheet" type="text/css" />
+        <link href="#{request.contextPath}/resources/css/iconos-1.css" rel="stylesheet" type="text/css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Id:" for="idActividad" />
+                <p:inputText size="8" id="idActividad" value="#{actividadController.actividad.idActividad}" disabled="true"/>
+                <h:outputLabel value="Sede:" for="sedeActividad" />
+                <p:inputText size="45" id="sedeActividad" value="#{actividadController.actividad.sedeActividad}" title="#{bundle.EditActividadTitle_sedeActividad}" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_sedeActividad}"/>
+                <h:outputLabel value="F. de Inicio:" for="fechaInicio" />
+                <h:panelGroup>
+                    <p:calendar id="fechaInicio" size="9" pattern="dd/MM/yyyy" value="#{actividadController.actividad.fechaInicio}" title="#{bundle.EditActividadTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_fechaInicio}"/>
+                    <p:spacer width="14" height="8"/>
+                    <h:outputLabel value="F. Fin:" for="fechaFin" />
+                    <p:spacer width="10" height="8"/>
+                    <p:calendar id="fechaFin" size="9" pattern="dd/MM/yyyy" value="#{actividadController.actividad.fechaFin}" title="#{bundle.EditActividadTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_fechaFin}"/>
+                </h:panelGroup>
+                <h:outputLabel value="Costo:" for="costo" />
+                <p:inputText id="costo" size="10" value="#{actividadController.actividad.costo}" style="text-align: right;" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_costo}"/>
+                <h:outputLabel value="F. Lim. de Inscripción:" for="fechaLimiteInscripcion" />
+                <p:calendar id="fechaLimiteInscripcion" size="9" pattern="dd/MM/yyyy" value="#{actividadController.actividad.fechaLimiteInscripcion}" title="#{bundle.EditActividadTitle_fechaLimiteInscripcion}" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_fechaLimiteInscripcion}"/>
+                <h:outputLabel value="Tipo actividad:" for="tipoActividadIdTipoActividad" />
+                <p:selectOneMenu id="tipoActividadIdTipoActividad" value="#{actividadController.actividad.idTipoActividad}" title="#{bundle.EditActividadTitle_tipoActividadIdTipoActividad}" required="true" requiredMessage="#{bundle.EditActividadRequiredMessage_tipoActividadIdTipoActividad}">
+                    <f:selectItems value="#{tipoActividadController.itemsAvailableSelectOne}"/>
+                </p:selectOneMenu>
+            </h:panelGrid> 
+            <br/><br/>
+            <p:commandButton action="#{actividadController.aceptarActividad}" icon="fa fa-floppy-o" value="Guardar"/>
+
+        </h:form>
+    </h:body>
+</html>

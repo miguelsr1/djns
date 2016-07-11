@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaOperaciones.xhtml">
+        <ui:define name="content">
+            <p:menubar> 
+                <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
+
+                <f:facet  name="options" class="centradoVertical">  
+                    <div id="divEstadoEdicion" style="position: relative; padding-top: 2px;">
+                        <h:panelGrid id="pnlEstado" columns="3">
+                            <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
+                                <f:facet name="start">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    <p:spacer width="10" height="8"/>
+                                    <p:outputLabel value="Espere por favor.." />
+                                </f:facet>
+
+                                <f:facet name="complete">
+                                    <h:outputText value="" />
+                                </f:facet>
+                            </p:ajaxStatus>
+                        </h:panelGrid>
+                    </div>
+                </f:facet>  
+            </p:menubar>
+
+            <p:panel header="Filtro" id="filtro">
+                <h:panelGrid columns="5">
+                    <h:outputText value="Fecha de alimentación:"/>
+                    <p:calendar id="cdlFecha" pattern="dd/MM/yyyy" size="9" value="#{personaController.fechaAlimentacion}"/>
+                    <p:spacer width="15" height="8"/>
+                    <h:outputText value="Tiempo de comida:"/>
+                    <p:selectOneMenu id="cboTiempoAli" value="#{personaController.idTiempoAlimentacion}" style="width:150px">
+                        <f:selectItem itemLabel="Seleccione un tiempo"/>
+                        <f:selectItem itemLabel="Desayuno" itemValue="D"/>
+                        <f:selectItem itemLabel="Almuerzo" itemValue="A"/>
+                        <f:selectItem itemLabel="Cena" itemValue="C"/>
+                        <p:ajax update="pnlDatos" process="@this,cdlFecha,cboTiempoAli" listener="#{personaController.actualizarAlimentacion}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel header="Alimentación entregada" id="pnlDatos">
+                <h:panelGrid columns="7">
+                    <p:outputLabel value="Código:"/>
+                    <p:inputText value="#{personaController.codigoPersona}" size="15">
+                        <p:ajax event="keyup" listener="#{personaController.buscarPersonaByCod}"  />
+                    </p:inputText>
+                    <p:spacer width="15" height="8"/>
+                    <p:outputLabel value="Nombre:"/>
+                    <p:inputText readonly="true" value="#{personaController.persona.nombres} #{personaController.persona.apellidos}" size="50"/>
+                    <p:spacer width="15" height="8"/>
+                    <p:commandButton value="Agregar" action="#{personaController.validarAlimentacionByPersona}" update="filtro pnlDatos" />
+                </h:panelGrid>
+                <p:dataTable value="#{personaController.lstAlimentacion}" var="al" rowKey="#{al.idAlimentacion}" rowIndexVar="idRow">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{idRow + 1}"/>
+                    </p:column>
+                    <p:column headerText="Nombre Completo">
+                        <p:outputLabel value="#{al.idDetalleAsistente.idPersona.nombres} #{al.idDetalleAsistente.idPersona.apellidos}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

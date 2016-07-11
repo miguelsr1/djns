@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
+        <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaLogin.xhtml">
+            <ui:define name="content" >
+                <h:form id="frmLogin">
+                    <p:growl id="growl" showDetail="true" autoUpdate="true" sticky="true" escape="false"/>
+                    <p:focus context="pnlCredenciales"/>  
+                    <p:panel id="pnlCredenciales" header="Iniciar sesión" style="width: 300px; top: 20px; " styleClass="panelGridCenter centradoTotal">
+                        <f:facet name="actions">
+                            <p:ajaxStatus style="width:150px;height:16px;">
+                                <f:facet name="start">
+                                    <p:outputLabel value="Espere por favor"/>
+                                    <i class="fa fa-spinner fa-pulse red" style="font-size: 20px;"></i>
+                                </f:facet>
+
+                                <f:facet name="complete">
+                                    <h:outputText value="" />
+                                </f:facet>
+                            </p:ajaxStatus>
+                        </f:facet>
+                        <h:panelGrid columns="1" style="text-align: center; width: 100%">
+                            <p:spacer height="20"/>
+                            <p:graphicImage value="#{pageContext.servletContext.contextPath}/resources/images/lock.png" rendered="false"/>
+                            <i class="fa fa-unlock-alt blue" style="font-size: 5em;"></i>
+                            <h:panelGrid columns="1" style="text-align: center; width: 100%">
+                                <p:spacer height="20"/>
+                                <p:inputText id="txtUsuario" styleClass="textMayuscula" onkeyup="return cUpper(this);" value="#{loginController.usuario}" style="text-align: center;width: 85%;" placeholder="Usuario"/>
+                                <p:password id="txtPassword" value="#{loginController.clave}" style="text-align: center;width: 85%;" placeholder="Clave de acceso"/>
+                                <p:spacer height="10"/>
+                                <p:commandButton style="width: 89%;" value="Ingresar" action="#{loginController.isUsuarioValido}" update="frmLogin"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

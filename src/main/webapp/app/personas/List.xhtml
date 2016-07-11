@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaOperaciones.xhtml">
+        <ui:define name="content">
+            <p:menubar> 
+                <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
+
+                <f:facet  name="options" class="centradoVertical">  
+                    <div id="divEstadoEdicion" style="position: relative; padding-top: 2px;">
+                        <h:panelGrid id="pnlEstado" columns="3">
+                            <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
+                                <f:facet name="start">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    <p:spacer width="10" height="8"/>
+                                    <p:outputLabel value="Espere por favor.." />
+                                </f:facet>
+
+                                <f:facet name="complete">
+                                    <h:outputText value="" />
+                                </f:facet>
+                            </p:ajaxStatus>
+                        </h:panelGrid>
+                    </div>
+                </f:facet>  
+            </p:menubar>
+
+            <p:panel header="Filtro" id="filtro">
+                <h:panelGrid columns="5">
+                    <p:outputLabel value="Distrito:"/>
+                    <p:selectOneMenu value="#{iglesiaController.distrito}" style="width:100px">
+                        <f:selectItems value="#{distritoController.itemsAvailableSelectMany}"/>
+                        <p:ajax update="filtro pnlDatos" />
+                    </p:selectOneMenu>
+                    <p:spacer width="15" height="8"/>
+                    <p:outputLabel value="Iglesia en:"/>
+                    <p:selectOneMenu id="cboIglesias" value="#{personaController.iglesia}" style="width:200px">
+                        <f:selectItems value="#{iglesiaController.iglesiasByDistrito}"/>
+                        <p:ajax update="pnlDatos"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel header="Datos de personas registradas" id="pnlDatos">
+                <p:commandButton action="#{personaController.prepareCreate}" icon="fa fa-plus" value="Agregar">
+                    <p:ajax event="dialogReturn" listener="#{personaController.onRefrescarLstPersona}" update="pnlDatos"/>
+                </p:commandButton>
+                <br/><br/>
+                <p:dataTable value="#{personaController.lstPersonasByIglesia}" var="item" rowIndexVar="rowId" >
+                    <p:column headerText="Id" style="width: 25px; text-align: center;">
+                        <h:outputText value="#{rowId + 1}"/>
+                    </p:column>
+                    <p:column headerText="Nombre completo">
+                        <h:outputText value="#{item.nombres} #{item.apellidos}"/>
+                    </p:column>
+                    <p:column headerText="Fecha Nac." width="75">
+                        <h:outputText value="#{item.fechaNacimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Sexo" style="text-align: center;" width="35">
+                        <h:outputText value="#{item.sexo}"/>
+                    </p:column>
+                    <p:column headerText="Talla" style="text-align: center;" width="35">
+                        <p:selectOneMenu value="#{item.talla}" disabled="true">
+                        <f:selectItem itemValue="1" itemLabel="12"/>
+                        <f:selectItem itemValue="2" itemLabel="14"/>
+                        <f:selectItem itemValue="3" itemLabel="S"/>
+                        <f:selectItem itemValue="4" itemLabel="M"/>
+                        <f:selectItem itemValue="5" itemLabel="L"/>
+                        <f:selectItem itemValue="6" itemLabel="XL"/>
+                    </p:selectOneMenu>
+                    </p:column>
+                    <p:column headerText="Bautizado" style="text-align: center;" width="60">
+                        <p:selectBooleanCheckbox value="#{item.bautizado}" disabled="true"/>
+                    </p:column>
+                    <p:column headerText="Editar" style="width: 36px; text-align: center;">
+                        <p:commandButton actionListener="#{personaController.prepareEdit}" icon="fa fa-pencil" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{personaController.persona}" />
+                            <p:ajax event="dialogReturn" listener="#{personaController.onRefrescarLstPersona}" update="pnlDatos"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

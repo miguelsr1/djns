@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Mantenimiento de Personas Registradas</title>
+        <style type="text/css">
+            .col1{
+                height:auto;vertical-align: top; width: 100px;
+            }
+            .col2{
+                height:auto; vertical-align: middle; width: 300px;
+            }
+        </style>
+        <h:outputStylesheet library="css" name="dialog.css" />
+        <h:outputStylesheet library="css" name="iconos-1.css" />
+        <h:outputScript library="js" name="calendar-localization.js"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:messages id="msgs" showDetail="true" autoUpdate="true" escape="false" closable="true"/>
+            <h:panelGrid columns="2">
+                <p:outputLabel  value="id:" for="idPersona" />
+                <p:inputText size="8" id="idPersona" value="#{personaController.persona.idPersona}" disabled="true" />
+                <p:outputLabel value="Nombres: " for="nombres" />
+                <p:inputText size="45" id="nombres"  value="#{personaController.persona.nombres}" required="true" requiredMessage="Nombres del Joven"/>
+                <p:outputLabel value="Apellidos:" for="apellidos" />
+                <p:inputText size="45" id="apellidos" value="#{personaController.persona.apellidos}" required="true" requiredMessage="Apellidos del Joven"/>
+                <p:outputLabel value="Fecha Nac." for="fechaNacimiento" />
+                <p:calendar id="fechaNacimiento" locale="es" mindate="01/01/1940" value="#{personaController.persona.fechaNacimiento}" navigator="true" size="12" pattern="dd/MM/yyyy" />
+                <p:outputLabel value="Sexo:" for="sexo" />
+                <h:panelGrid columns="4">
+                    <p:selectOneMenu id="sexo" value="#{personaController.persona.sexo}">
+                        <f:selectItem itemValue="M" itemLabel="Masculino"/>
+                        <f:selectItem itemValue="F" itemLabel="Femenino"/>
+                    </p:selectOneMenu>
+                    <p:spacer width="15" height="8"/>
+                    <p:outputLabel value="Talla camisa:" for="cboTalla" />
+                    <p:selectOneMenu id="cboTalla" value="#{personaController.persona.talla}">
+                        <f:selectItem itemValue="1" itemLabel="12"/>
+                        <f:selectItem itemValue="2" itemLabel="14"/>
+                        <f:selectItem itemValue="3" itemLabel="S"/>
+                        <f:selectItem itemValue="4" itemLabel="M"/>
+                        <f:selectItem itemValue="5" itemLabel="L"/>
+                        <f:selectItem itemValue="6" itemLabel="XL"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <p:outputLabel value="Bautizado:" for="bautizado" />
+                <p:selectBooleanCheckbox id="bautizado" value="#{personaController.persona.bautizado}" />
+            </h:panelGrid>
+            <br/><br/>
+            <p:commandButton action="#{personaController.aceptarPersona}" icon="fa fa-floppy-o" value="Guardar"/>
+        </h:form>
+    </h:body>
+</html>

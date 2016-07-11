@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="#{request.contextPath}/resources/css/principal.css" rel="stylesheet" type="text/css" />
+        <link href="#{request.contextPath}/resources/css/spark.css" rel="stylesheet" type="text/css" />
+        <link href="#{request.contextPath}/resources/css/iconos-1.css" rel="stylesheet" type="text/css" />
+        <h:outputScript library="js" name="js/funciones-1.js"/>
+        <h:outputScript library="js" name="calendar-localization.js"/>
+        <title>Sistema de Registro de Jóvenes</title>
+    </h:head>
+
+    <h:body>
+        <h:form id="frmPrincipal" prependId="false" >
+            <p:growl id="growl" showDetail="true" autoUpdate="true" escape="false" />
+            <div id="layout-topbar" class="ShadowGray">
+                <div id="layout-topbar-indent">
+                    <div class="pageColumnRight">
+                        <h:panelGrid columns="1">
+                            <p:spacer height="8"/>
+                            <p:graphicImage styleClass="img1" value="#{pageContext.servletContext.contextPath}/resources/images/logo_id.png"/> 
+                        </h:panelGrid>
+                    </div>
+                    <div class="pageColumnMid" style="text-align: left;">
+                        <br/><h:outputText style="font-size: 20px; color: black;" value="Departamento Juvenil Nacional"/>
+                        <br/><h:outputText style="font-size: 18px; color: black;" value="Sistema de Registro de Jovenes"/>
+                    </div>
+
+                    <ul id="layout-topbar-menu">
+                        <li class="fa fa-ellipsis-v menu-separator"></li>
+                        <li>
+                            <a class="Animated05 CursPointer" tabindex="-1">
+                                <i class="fa fa-user"></i>
+                                #{personaController.leyendaUsuario}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="fluid-banner">
+                <div id="layout-portlets-cover">
+                    <div class="layout-portlets-box">
+                        <div class="Container100 Responsive">
+                            <ui:insert name="content"></ui:insert>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fixed-thumbs" style="text-align: center; margin-top: 5px;">
+                <h:outputText value="Iglesia de Dios, Columna y apoyo de la verdad" style="color: white; font-size: 11px; font-weight: bold;"/>
+            </div>
+        </h:form>
+    </h:body>
+</html>
