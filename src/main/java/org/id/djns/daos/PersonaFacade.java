@@ -52,6 +52,7 @@ public class PersonaFacade extends AbstractFacade<Persona> {
             return (Persona) q.getSingleResult();
         }
     }
+    
 
     public DetalleAsistente getDetalleAsistenciaByCod(String codigo) {
         Query q = em.createQuery("SELECT d FROM DetalleAsistente d WHERE d.idPersona.codigoPersona =:codigo", DetalleAsistente.class);

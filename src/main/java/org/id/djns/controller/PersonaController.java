@@ -196,6 +196,10 @@ public class PersonaController implements Serializable {
     public void prepareEdit() {
         abrirDialogo();
     }
+    
+    public void prepareDelete(){
+        getFacade().remove(persona);
+    }
 
     public void guardar() {
         try {

@@ -61,8 +61,8 @@ body {
 }
 #fluid-banner {
     height: 100%;
-    height: -webkit-calc(100vh - 120px);
-    height: calc(100vh - 120px);
+    /*height: -webkit-calc(100vh - 120px);
+    height: calc(100vh - 120px);*/
     max-width: 1024px; 
     overflow:hidden; 
     margin: 0 auto;

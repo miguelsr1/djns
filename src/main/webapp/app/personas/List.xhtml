@@ -68,13 +68,13 @@
                     </p:column>
                     <p:column headerText="Talla" style="text-align: center;" width="35">
                         <p:selectOneMenu value="#{item.talla}" disabled="true">
-                        <f:selectItem itemValue="1" itemLabel="12"/>
-                        <f:selectItem itemValue="2" itemLabel="14"/>
-                        <f:selectItem itemValue="3" itemLabel="S"/>
-                        <f:selectItem itemValue="4" itemLabel="M"/>
-                        <f:selectItem itemValue="5" itemLabel="L"/>
-                        <f:selectItem itemValue="6" itemLabel="XL"/>
-                    </p:selectOneMenu>
+                            <f:selectItem itemValue="1" itemLabel="12"/>
+                            <f:selectItem itemValue="2" itemLabel="14"/>
+                            <f:selectItem itemValue="3" itemLabel="S"/>
+                            <f:selectItem itemValue="4" itemLabel="M"/>
+                            <f:selectItem itemValue="5" itemLabel="L"/>
+                            <f:selectItem itemValue="6" itemLabel="XL"/>
+                        </p:selectOneMenu>
                     </p:column>
                     <p:column headerText="Bautizado" style="text-align: center;" width="60">
                         <p:selectBooleanCheckbox value="#{item.bautizado}" disabled="true"/>
@@ -85,8 +85,20 @@
                             <p:ajax event="dialogReturn" listener="#{personaController.onRefrescarLstPersona}" update="pnlDatos"/>
                         </p:commandButton>
                     </p:column>
+                    <p:column headerText="Borrar" style="width: 36px; text-align: center;">
+                        <p:commandButton  actionListener="#{personaController.prepareDelete}" icon="fa fa-trash-o" title="View">
+                            <f:setPropertyActionListener value="#{item}" target="#{personaController.persona}" />
+                            <p:confirm header="Confirmation" message="Esta usted seguro de borrar el registro seleccioando?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                        
+                    </p:column>
                 </p:dataTable>
             </p:panel>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
 
         </ui:define>
     </ui:composition>
