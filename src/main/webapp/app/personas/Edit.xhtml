@@ -14,14 +14,16 @@
                 height:auto; vertical-align: middle; width: 300px;
             }
         </style>
-        <h:outputStylesheet library="css" name="dialog.css" />
-        <h:outputStylesheet library="css" name="iconos-1.css" />
+        <h:outputScript name="nanoscroller.js" library="js" />
+        <h:outputScript name="layout.js" library="js" />
+        <h:outputScript name="ripple.js" library="js" />
+        <h:outputScript name="swipe.js" library="js" />
         <h:outputScript library="js" name="calendar-localization.js"/>
     </h:head>
     <h:body>
         <h:form>
             <p:messages id="msgs" showDetail="true" autoUpdate="true" escape="false" closable="true"/>
-            <h:panelGrid columns="2">
+            <p:panelGrid  columns="2" columnClasses="ui-grid-col-3,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank">
                 <p:outputLabel  value="id:" for="idPersona" />
                 <p:inputText size="8" id="idPersona" value="#{personaController.persona.idPersona}" disabled="true" />
                 <p:outputLabel value="Nombres: " for="nombres" />
@@ -31,27 +33,28 @@
                 <p:outputLabel value="Fecha Nac." for="fechaNacimiento" />
                 <p:calendar id="fechaNacimiento" locale="es" mindate="01/01/1940" value="#{personaController.persona.fechaNacimiento}" navigator="true" size="12" pattern="dd/MM/yyyy" />
                 <p:outputLabel value="Sexo:" for="sexo" />
-                <h:panelGrid columns="4">
-                    <p:selectOneMenu id="sexo" value="#{personaController.persona.sexo}">
-                        <f:selectItem itemValue="M" itemLabel="Masculino"/>
-                        <f:selectItem itemValue="F" itemLabel="Femenino"/>
-                    </p:selectOneMenu>
-                    <p:spacer width="15" height="8"/>
-                    <p:outputLabel value="Talla camisa:" for="cboTalla" />
-                    <p:selectOneMenu id="cboTalla" value="#{personaController.persona.talla}">
-                        <f:selectItem itemValue="1" itemLabel="12"/>
-                        <f:selectItem itemValue="2" itemLabel="14"/>
-                        <f:selectItem itemValue="3" itemLabel="S"/>
-                        <f:selectItem itemValue="4" itemLabel="M"/>
-                        <f:selectItem itemValue="5" itemLabel="L"/>
-                        <f:selectItem itemValue="6" itemLabel="XL"/>
-                    </p:selectOneMenu>
-                </h:panelGrid>
+                <p:selectOneMenu id="sexo" value="#{personaController.persona.sexo}">
+                    <f:selectItem itemValue="M" itemLabel="Masculino"/>
+                    <f:selectItem itemValue="F" itemLabel="Femenino"/>
+                </p:selectOneMenu>
+                <p:outputLabel value="Talla camisa:" for="cboTalla" />
+                <p:selectOneMenu id="cboTalla" value="#{personaController.persona.talla}">
+                    <f:selectItem itemValue="1" itemLabel="12"/>
+                    <f:selectItem itemValue="2" itemLabel="14"/>
+                    <f:selectItem itemValue="3" itemLabel="S"/>
+                    <f:selectItem itemValue="4" itemLabel="M"/>
+                    <f:selectItem itemValue="5" itemLabel="L"/>
+                    <f:selectItem itemValue="6" itemLabel="XL"/>
+                </p:selectOneMenu>
                 <p:outputLabel value="Bautizado:" for="bautizado" />
                 <p:selectBooleanCheckbox id="bautizado" value="#{personaController.persona.bautizado}" />
-            </h:panelGrid>
-            <br/><br/>
+            </p:panelGrid><br/>
             <p:commandButton action="#{personaController.aceptarPersona}" icon="fa fa-floppy-o" value="Guardar"/>
         </h:form>
+
+        <h:outputStylesheet name="nanoscroller.css" library="css" />
+        <h:outputStylesheet name="animate.css" library="css" />
+        <h:outputStylesheet name="ripple.css" library="css" />
+        <h:outputStylesheet name="layout-indigo.css" library="css" />
     </h:body>
 </html>

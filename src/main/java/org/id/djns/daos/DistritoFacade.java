@@ -7,6 +7,7 @@ package org.id.djns.daos;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import org.id.djns.model.Distrito;
 

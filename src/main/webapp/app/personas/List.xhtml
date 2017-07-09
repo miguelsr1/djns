@@ -1,54 +1,52 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="#{pageContext.servletContext.contextPath}/resources/template/plantilla.xhtml">
+    <ui:define name="content">
+        <p:menubar> 
+            <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
 
-    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaOperaciones.xhtml">
-        <ui:define name="content">
-            <p:menubar> 
-                <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
+            <f:facet  name="options" class="centradoVertical">  
+                <div id="divEstadoEdicion" style="position: relative; padding-top: 2px;">
+                    <h:panelGrid id="pnlEstado" columns="3">
+                        <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
+                            <f:facet name="start">
+                                <i class="fa fa-spinner fa-pulse fa-fw" style="font-size: 12px;"></i>
+                                <p:spacer width="10" height="8"/>
+                                <p:outputLabel value="Espere por favor.." />
+                            </f:facet>
 
-                <f:facet  name="options" class="centradoVertical">  
-                    <div id="divEstadoEdicion" style="position: relative; padding-top: 2px;">
-                        <h:panelGrid id="pnlEstado" columns="3">
-                            <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
-                                <f:facet name="start">
-                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                    <p:spacer width="10" height="8"/>
-                                    <p:outputLabel value="Espere por favor.." />
-                                </f:facet>
-
-                                <f:facet name="complete">
-                                    <h:outputText value="" />
-                                </f:facet>
-                            </p:ajaxStatus>
-                        </h:panelGrid>
-                    </div>
-                </f:facet>  
-            </p:menubar>
-
-            <p:panel header="Filtro" id="filtro">
-                <h:panelGrid columns="5">
-                    <p:outputLabel value="Distrito:"/>
-                    <p:selectOneMenu value="#{iglesiaController.distrito}" style="width:100px">
-                        <f:selectItems value="#{distritoController.itemsAvailableSelectMany}"/>
-                        <p:ajax update="filtro pnlDatos" />
-                    </p:selectOneMenu>
-                    <p:spacer width="15" height="8"/>
-                    <p:outputLabel value="Iglesia en:"/>
-                    <p:selectOneMenu id="cboIglesias" value="#{personaController.iglesia}" style="width:200px">
-                        <f:selectItems value="#{iglesiaController.iglesiasByDistrito}"/>
-                        <p:ajax update="pnlDatos"/>
-                    </p:selectOneMenu>
-                </h:panelGrid>
-            </p:panel>
+                            <f:facet name="complete">
+                                <h:outputText value="" />
+                            </f:facet>
+                        </p:ajaxStatus>
+                    </h:panelGrid>
+                </div>
+            </f:facet>  
+        </p:menubar>
+        <div class="card card-w-title">
+            <h3>Filtro <i class="fa fa-filter" aria-hidden="true"></i></h3>
+            <p:panelGrid  columns="6" columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-1,ui-grid-col-2,ui-grid-col-5,ui-grid-col-5" layout="grid" styleClass="ui-panelgrid-blank">
+                <p:outputLabel value="Distrito:"/>
+                <p:selectOneMenu value="#{iglesiaController.distrito}" style="width:100px">
+                    <f:selectItems value="#{distritoController.itemsAvailableSelectMany}"/>
+                    <p:ajax update="cboIglesias :frmPrincipal:pnlDatos" />
+                </p:selectOneMenu>
+                <p:outputLabel value="Iglesia en:"/>
+                <p:selectOneMenu id="cboIglesias" value="#{personaController.iglesia}" style="width:200px">
+                    <f:selectItems value="#{iglesiaController.iglesiasByDistrito}"/>
+                    <p:ajax update=":frmPrincipal:pnlDatos"/>
+                </p:selectOneMenu>
+                <p:spacer height="8"/>
+                <p:spacer height="8"/>
+            </p:panelGrid>
 
             <p:panel header="Datos de personas registradas" id="pnlDatos">
                 <p:commandButton action="#{personaController.prepareCreate}" icon="fa fa-plus" value="Agregar">
-                    <p:ajax event="dialogReturn" listener="#{personaController.onRefrescarLstPersona}" update="pnlDatos"/>
+                    <p:ajax event="dialogReturn" listener="#{personaController.onRefrescarLstPersona}" update=":frmPrincipal:pnlDatos"/>
                 </p:commandButton>
                 <br/><br/>
                 <p:dataTable value="#{personaController.lstPersonasByIglesia}" var="item" rowIndexVar="rowId" >
@@ -82,25 +80,25 @@
                     <p:column headerText="Editar" style="width: 36px; text-align: center;">
                         <p:commandButton actionListener="#{personaController.prepareEdit}" icon="fa fa-pencil" title="View">
                             <f:setPropertyActionListener value="#{item}" target="#{personaController.persona}" />
-                            <p:ajax event="dialogReturn" listener="#{personaController.onRefrescarLstPersona}" update="pnlDatos"/>
+                            <p:ajax event="dialogReturn" listener="#{personaController.onRefrescarLstPersona}" update=":frmPrincipal:pnlDatos"/>
                         </p:commandButton>
                     </p:column>
                     <p:column headerText="Borrar" style="width: 36px; text-align: center;">
-                        <p:commandButton  actionListener="#{personaController.prepareDelete}" icon="fa fa-trash-o" title="View">
+                        <p:commandButton  oncomplete="PF('confirmDialog').show();" process="@this" icon="fa fa-trash-o" title="View">
                             <f:setPropertyActionListener value="#{item}" target="#{personaController.persona}" />
-                            <p:confirm header="Confirmation" message="Esta usted seguro de borrar el registro seleccioando?" icon="ui-icon-alert" />
                         </p:commandButton>
-                        
+
                     </p:column>
                 </p:dataTable>
             </p:panel>
+        </div>
 
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-            </p:confirmDialog>
+        <p:confirmDialog id="confirmDialog" widgetVar="confirmDialog" global="true" showEffect="fade" hideEffect="fade" severity="alert" appendTo="@(body)"
+                         header="Confirmation" message="Esta usted seguro de borrar el registro seleccioando?" closable="false" >
+            <p:commandButton action="#{personaController.prepareDelete}" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" 
+                             update=":frmPrincipal:pnlDatos" oncomplete="PF('confirmDialog').hide();" ajax="true" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="PF('confirmDialog').hide();" />
+        </p:confirmDialog>
 
-        </ui:define>
-    </ui:composition>
-
-</html>
+    </ui:define>
+</ui:composition>

@@ -1,50 +1,48 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="#{pageContext.servletContext.contextPath}/resources/template/plantilla.xhtml">
+    <ui:define name="content">
+        <p:menubar> 
+            <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
 
-    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaOperaciones.xhtml">
-        <ui:define name="content">
-            <p:menubar> 
-                <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
+            <f:facet  name="options" class="centradoVertical">  
+                <div id="divEstadoEdicion" style="position: relative; padding-top: 2px;">
+                    <h:panelGrid id="pnlEstado" columns="3">
+                        <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
+                            <f:facet name="start">
+                                <i class="fa fa-spinner fa-pulse fa-fw" style="font-size: 12px;"></i>
+                                <p:spacer width="10" height="8"/>
+                                <p:outputLabel value="Espere por favor.." />
+                            </f:facet>
 
-                <f:facet  name="options" class="centradoVertical">  
-                    <div id="divEstadoEdicion" style="position: relative; padding-top: 2px;">
-                        <h:panelGrid id="pnlEstado" columns="3">
-                            <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
-                                <f:facet name="start">
-                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                                    <p:spacer width="10" height="8"/>
-                                    <p:outputLabel value="Espere por favor.." />
-                                </f:facet>
+                            <f:facet name="complete">
+                                <h:outputText value="" />
+                            </f:facet>
+                        </p:ajaxStatus>
+                    </h:panelGrid>
+                </div>
+            </f:facet>  
+        </p:menubar>
 
-                                <f:facet name="complete">
-                                    <h:outputText value="" />
-                                </f:facet>
-                            </p:ajaxStatus>
-                        </h:panelGrid>
-                    </div>
-                </f:facet>  
-            </p:menubar>
-
-            <p:panel header="Filtro" id="filtro">
-                <h:panelGrid columns="5">
-                    <p:outputLabel value="Distrito:"/>
-                    <p:selectOneMenu value="#{iglesiaController.distrito}" style="width:100px">
-                        <f:selectItems value="#{distritoController.itemsAvailableSelectMany}"/>
-                        <p:ajax update="filtro pnlDatos" />
-                    </p:selectOneMenu>
-                    <p:spacer width="15" height="8"/>
-                    <p:outputLabel value="Iglesia en:"/>
-                    <p:selectOneMenu id="cboIglesias" value="#{detallePagoController.iglesia}" style="width:200px">
-                        <f:selectItems value="#{iglesiaController.iglesiasByDistrito}"/>
-                        <p:ajax update="pnlDatos" listener="#{iglesiaController.actualizarListaConfirmados}"/>
-                    </p:selectOneMenu>
-                </h:panelGrid>
-            </p:panel>
+        <div class="card card-w-title">
+            <h3>Filtro <i class="fa fa-filter" aria-hidden="true"></i></h3>
+            <p:panelGrid  columns="6" columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-1,ui-grid-col-2,ui-grid-col-5,ui-grid-col-5" layout="grid" styleClass="ui-panelgrid-blank">
+                <p:outputLabel value="Distrito:"/>
+                <p:selectOneMenu value="#{iglesiaController.distrito}" style="width:100px">
+                    <f:selectItems value="#{distritoController.itemsAvailableSelectMany}"/>
+                    <p:ajax update="cboIglesias pnlDatos" />
+                </p:selectOneMenu>
+                <p:spacer width="15" height="8"/>
+                <p:outputLabel value="Iglesia en:"/>
+                <p:selectOneMenu id="cboIglesias" value="#{detallePagoController.iglesia}" style="width:200px">
+                    <f:selectItems value="#{iglesiaController.iglesiasByDistrito}"/>
+                    <p:ajax update="pnlDatos" listener="#{iglesiaController.actualizarListaConfirmados}"/>
+                </p:selectOneMenu>
+            </p:panelGrid>
 
             <p:panel header="Datos de personas registradas" id="pnlDatos">
                 <p:commandButton action="#{detallePagoController.prepareCreate}" icon="fa fa-plus" value="Agregar">
@@ -72,11 +70,10 @@
                     </p:column>
                 </p:dataTable>
             </p:panel>
+        </div>
 
-            <p:dialog id="dlgComprobante" widgetVar="dlgComprobante">
-                <p:graphicImage value="/DynamicImageServlet?file=#{detallePagoController.detallePago.pathImg}"/>
-            </p:dialog>
-        </ui:define>
-    </ui:composition>
-
-</html>
+        <p:dialog id="dlgComprobante" widgetVar="dlgComprobante">
+            <p:graphicImage value="/DynamicImageServlet?file=#{detallePagoController.detallePago.pathImg}"/>
+        </p:dialog>
+    </ui:define>
+</ui:composition>

@@ -45,8 +45,8 @@ public class Iglesia implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "nombre_iglesia")
     private String nombreIglesia;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIglesia", fetch = FetchType.LAZY)
-    private List<DetallePago> detallePagoList;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "idIglesia", fetch = FetchType.LAZY)
+//    private List<DetallePago> detallePagoList;
     @JoinColumn(name = "id_distrito", referencedColumnName = "id_distrito")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Distrito idDistrito;
@@ -81,13 +81,13 @@ public class Iglesia implements Serializable {
         this.nombreIglesia = nombreIglesia;
     }
 
-    public List<DetallePago> getDetallePagoList() {
-        return detallePagoList;
-    }
-
-    public void setDetallePagoList(List<DetallePago> detallePagoList) {
-        this.detallePagoList = detallePagoList;
-    }
+//    public List<DetallePago> getDetallePagoList() {
+//        return detallePagoList;
+//    }
+//
+//    public void setDetallePagoList(List<DetallePago> detallePagoList) {
+//        this.detallePagoList = detallePagoList;
+//    }
 
     public Distrito getIdDistrito() {
         return idDistrito;

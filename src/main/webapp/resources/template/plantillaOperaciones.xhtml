@@ -8,7 +8,6 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="#{request.contextPath}/resources/css/principal.css" rel="stylesheet" type="text/css" />
-        <link href="#{request.contextPath}/resources/css/spark.css" rel="stylesheet" type="text/css" />
         <link href="#{request.contextPath}/resources/css/iconos-1.css" rel="stylesheet" type="text/css" />
         <h:outputScript library="js" name="funciones-1.js"/>
         <h:outputScript library="js" name="calendar-localization.js"/>
@@ -23,7 +22,7 @@
                     <div class="pageColumnRight">
                         <h:panelGrid columns="1">
                             <p:spacer height="8"/>
-                            <p:graphicImage styleClass="img1" value="#{pageContext.servletContext.contextPath}/resources/images/logo_id.png"/> 
+                            <p:graphicImage library="images" styleClass="img1" name="logo-djn.png"/> 
                         </h:panelGrid>
                     </div>
                     <div class="pageColumnMid" style="text-align: left;">

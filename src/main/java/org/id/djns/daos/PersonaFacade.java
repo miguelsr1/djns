@@ -12,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.id.djns.model.Alimentacion;
-import org.id.djns.model.Asistencia;
 import org.id.djns.model.DetalleAsistente;
 import org.id.djns.model.Persona;
 

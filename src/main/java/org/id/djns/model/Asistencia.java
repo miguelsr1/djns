@@ -36,8 +36,8 @@ public class Asistencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_asistencia")
     private Integer idAsistencia;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAsistencia", fetch = FetchType.LAZY)
-    private List<DetallePago> detallePagoList;
+//   // @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAsistencia", fetch = FetchType.LAZY)
+//    private List<DetallePago> detallePagoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAsistencia", fetch = FetchType.LAZY)
     private List<DetalleAsistente> detalleAsistenteList;
     @JoinColumn(name = "id_actividad", referencedColumnName = "id_actividad")
@@ -46,7 +46,7 @@ public class Asistencia implements Serializable {
 
     public Asistencia() {
     }
-
+//
     public Asistencia(Integer idAsistencia) {
         this.idAsistencia = idAsistencia;
     }
@@ -59,13 +59,13 @@ public class Asistencia implements Serializable {
         this.idAsistencia = idAsistencia;
     }
 
-    public List<DetallePago> getDetallePagoList() {
-        return detallePagoList;
-    }
-
-    public void setDetallePagoList(List<DetallePago> detallePagoList) {
-        this.detallePagoList = detallePagoList;
-    }
+//    public List<DetallePago> getDetallePagoList() {
+//        return detallePagoList;
+//    }
+//
+//    public void setDetallePagoList(List<DetallePago> detallePagoList) {
+//        this.detallePagoList = detallePagoList;
+//    }
 
     public List<DetalleAsistente> getDetalleAsistenteList() {
         return detalleAsistenteList;

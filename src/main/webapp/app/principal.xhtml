@@ -2,60 +2,84 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaLogin.xhtml">
-        <ui:define name="content">
-            <h:form>
-                <p:growl id="growl" showDetail="true" autoUpdate="true" escape="false"/>
-                <div class="contentPrincipal ">
-                    <div style="position: absolute; right: 1%;" >
-                        <p:commandButton value="Salir" icon="fa fa-sign-out" action="#{loginController.logout}"/>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>PrimeFaces Ultima</title>
+        <h:outputScript name="nanoscroller.js" library="js" />
+        <h:outputScript name="layout.js" library="js" />
+        <h:outputScript name="ripple.js" library="js" />
+        <h:outputScript name="swipe.js" library="js" />
+    </h:head>
+    <h:body styleClass="landing-body">
+        <h:form>
+            <p:growl id="growl" showDetail="true" autoUpdate="true" escape="false"/>
+            <div class="landing-wrapper"> 
+                <div id="features">
+                    <h:panelGrid columns="3" style="width: 90%;">
+                        <p:graphicImage name="logo_id.png" library="images" />
+                        <h:panelGrid columns="1">
+                            <br/>
+                            <h2>Departamento Juvenil Nacional</h2>
+                            <p>Sistema de Registro de Jovenes"</p>
+                        </h:panelGrid>
+                        <p:graphicImage name="logo-djn.jpg" library="images" />
+                    </h:panelGrid>
+                </div>
+
+
+                <div class="ui-g">
+
+                    <div class="ui-g-12 ui-md-3">
+                        <p:commandLink action="#{menuController.selectOpcion}" ajax="false" styleClass="secciones">
+                            <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto;">
+                                <p:graphicImage value="../resources/images/users.png" />
+                                <span style="font-size: 12px;">Registro de<br />Persona</span>
+                            </h:panelGrid>
+                            <f:setPropertyActionListener target="#{menuController.app}" value="1" />
+                        </p:commandLink>
                     </div>
-                    <div class="bloque2 propiedadBloque2 textoConSombra" style=" min-height:200px; background-position:left top; background-repeat:no-repeat;">
-                        <h3 class="estiloDeTopico estiloFuente">M E N U</h3>
-                        <p:separator/>
-                        <div class="subItem" >
-                            <p:commandLink action="#{menuController.selectOpcion}" ajax="false" styleClass="secciones">
-                                <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto;">
-                                    <p:graphicImage value="../resources/images/users.png" />
-                                    <span style="font-size: 12px;">Registro de<br />Persona</span>
-                                </h:panelGrid>
-                                <f:setPropertyActionListener target="#{menuController.app}" value="1" />
-                            </p:commandLink>
-                        </div>
-                        <div class="subItem" >
-                            <p:commandLink action="#{menuController.selectOpcion}" ajax="false" styleClass="secciones">
-                                <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto;">
-                                    <p:graphicImage value="../resources/images/dinero.png" />
-                                    <span style="font-size: 12px;">Registros de<br />Abonos</span>
-                                </h:panelGrid>
-                                <f:setPropertyActionListener target="#{menuController.app}" value="2" />
-                            </p:commandLink>
-                        </div>
-                        <div class="subItem" >
-                            <p:commandLink action="#{menuController.selectOpcion}" ajax="false" styleClass="secciones">
-                                <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto;">
-                                    <p:graphicImage value="../resources/images/confirmacion.png" />
-                                    <span style="font-size: 12px;">Confirmación <br />de Asistencia</span>
-                                </h:panelGrid>
-                                <f:setPropertyActionListener target="#{menuController.app}" value="3" />
-                            </p:commandLink>
-                        </div>
-                        <div class="subItem" >
-                            <p:commandLink action="#{menuController.selectOpcion}" ajax="false" styleClass="secciones">
-                                <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto;">
-                                    <p:graphicImage value="../resources/images/comida.png" />
-                                    <span style="font-size: 12px;">Control de<br />Alimentación</span>
-                                </h:panelGrid>
-                                <f:setPropertyActionListener target="#{menuController.app}" value="4" />
-                            </p:commandLink>
-                        </div>
+                    <div class="ui-g-12 ui-md-3">
+                        <p:commandLink action="#{menuController.selectOpcion}" ajax="false" styleClass="secciones">
+                            <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto;">
+                                <p:graphicImage value="../resources/images/dinero.png" />
+                                <span style="font-size: 12px;">Registros de<br />Abonos</span>
+                            </h:panelGrid>
+                            <f:setPropertyActionListener target="#{menuController.app}" value="2" />
+                        </p:commandLink>
+                    </div>
+                    <div class="ui-g-12 ui-md-3">
+                        <p:commandLink action="#{menuController.selectOpcion}" ajax="false" styleClass="secciones">
+                            <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto;">
+                                <p:graphicImage value="../resources/images/confirmacion.png" />
+                                <span style="font-size: 12px;">Confirmación <br />de Asistencia</span>
+                            </h:panelGrid>
+                            <f:setPropertyActionListener target="#{menuController.app}" value="3" />
+                        </p:commandLink>
+                    </div>
+                    <div class="ui-g-12 ui-md-3">
+                        <p:commandLink action="#{menuController.selectOpcion}" ajax="false" styleClass="secciones">
+                            <h:panelGrid columns="2" style="margin-left: auto; margin-right: auto;">
+                                <p:graphicImage value="../resources/images/comida.png" />
+                                <span style="font-size: 12px;">Control de<br />Alimentación</span>
+                            </h:panelGrid>
+                            <f:setPropertyActionListener target="#{menuController.app}" value="4" />
+                        </p:commandLink>
                     </div>
                 </div>
-            </h:form>
-        </ui:define>
-    </ui:composition>
+            </div>
+        </h:form>
+        <h:outputStylesheet name="nanoscroller.css" library="css" />
+        <h:outputStylesheet name="animate.css" library="css" />
+        <h:outputStylesheet name="ripple.css" library="css" />
+        <h:outputStylesheet name="layout-indigo.css" library="css" />
+    </h:body>
 </html>
 

@@ -186,10 +186,8 @@ public class PersonaController implements Serializable {
     public void abrirDialogo() {
         Map<String, Object> opt = new HashMap<String, Object>();
         opt.put("modal", true);
-        opt.put("draggable", false);
-        opt.put("resizable", false);
-        opt.put("contentHeight", 300);
-        opt.put("contentWidth", 550);
+        opt.put("contentHeight", 400);
+        opt.put("contentWidth", 650);
         RequestContext.getCurrentInstance().openDialog("/app/personas/Edit", opt, null);
     }
 

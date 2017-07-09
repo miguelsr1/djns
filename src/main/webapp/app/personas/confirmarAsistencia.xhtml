@@ -6,7 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantillaOperaciones.xhtml">
+    <ui:composition template="#{pageContext.servletContext.contextPath}/resources/template/plantilla.xhtml">
         <ui:define name="content">
             <p:menubar> 
                 <p:menuitem value="Principal" icon="fa fa-home" url="#{pageContext.servletContext.contextPath}/app/principal.xhtml"/>
@@ -16,7 +16,7 @@
                         <h:panelGrid id="pnlEstado" columns="3">
                             <p:ajaxStatus id="ajaxIcon" style="width:160px;height:16px;">
                                 <f:facet name="start">
-                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    <i class="fa fa-spinner fa-pulse fa-fw" style="font-size: 12px;"></i>
                                     <p:spacer width="10" height="8"/>
                                     <p:outputLabel value="Espere por favor.." />
                                 </f:facet>
@@ -30,12 +30,13 @@
                 </f:facet>  
             </p:menubar>
 
-            <p:panel header="Filtro" id="filtro">
-                <h:panelGrid columns="5">
+            <div class="card card-w-title">
+                <h3>Filtro <i class="fa fa-filter" aria-hidden="true"></i></h3>
+                <p:panelGrid  columns="6" columnClasses="ui-grid-col-1,ui-grid-col-2,ui-grid-col-1,ui-grid-col-2,ui-grid-col-5,ui-grid-col-5" layout="grid" styleClass="ui-panelgrid-blank">
                     <p:outputLabel value="Distrito:"/>
                     <p:selectOneMenu value="#{iglesiaController.distrito}" style="width:100px">
                         <f:selectItems value="#{distritoController.itemsAvailableSelectMany}"/>
-                        <p:ajax update="filtro pnlDatos" />
+                        <p:ajax update="cboIglesias pnlDatos" />
                     </p:selectOneMenu>
                     <p:spacer width="15" height="8"/>
                     <p:outputLabel value="Iglesia en:"/>
@@ -43,17 +44,16 @@
                         <f:selectItems value="#{iglesiaController.iglesiasByDistrito}"/>
                         <p:ajax update="pnlDatos" listener="#{personaController.actualizarModelAsistencia}"/>
                     </p:selectOneMenu>
-                </h:panelGrid>
-            </p:panel>
+                </p:panelGrid>
 
-            <p:panel header="Confirmar asistencia" id="pnlDatos">
-                <p:pickList id="pickList" value="#{personaController.asisModel}" var="asis" itemLabel="#{asis}" itemValue="#{asis.idPersona}">
-                    <f:facet name="sourceCaption" >Disponibles</f:facet>
-                    <f:facet name="targetCaption" >Confirmados</f:facet>
-                    <p:ajax event="transfer" listener="#{personaController.onTranfer}" />
-                </p:pickList>
-            </p:panel>
-
+                <p:panel header="Confirmar asistencia" id="pnlDatos">
+                    <p:pickList id="pickList" value="#{personaController.asisModel}" var="asis" itemLabel="#{asis}" itemValue="#{asis.idPersona}">
+                        <f:facet name="sourceCaption" >Disponibles</f:facet>
+                        <f:facet name="targetCaption" >Confirmados</f:facet>
+                        <p:ajax event="transfer" listener="#{personaController.onTranfer}" />
+                    </p:pickList>
+                </p:panel>
+            </div>
         </ui:define>
     </ui:composition>
 
